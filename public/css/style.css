@@ -1,0 +1,57 @@
+body{
+    text-align: center;
+    background-color: rgba(0, 0, 0,0.9);
+    color: rgba(0, 0, 0,0.9);;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+
+h1{
+    
+    background-color: rgb(168, 116, 3); 
+    margin-right: 50px;
+    width: 80%;
+    margin-bottom: 100px;
+    font-family: monospace;
+    border-radius: 6px;
+    padding: 20px;
+    font-size: 2.1em; 
+    box-shadow: 2px 2px 2px 2px black;
+}
+
+button{
+ 
+    background-color: rgb(168, 116, 3);  
+    width: 120px; 
+    border-radius: 7px;
+    border: none;
+    padding: 8px;
+    width: 80%;
+    margin-left: 70px;
+    font-weight: bolder;
+    font-family: monospace;
+    font-size: 1.5em;
+    box-shadow: 2px 2px 2px 2px black;
+    
+}
+
+
+
+.desButtons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 60%;
+}
+
+
+.blank{
+
+}
+
+img{
+   margin: 30px;
+}
