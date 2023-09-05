@@ -39,7 +39,9 @@ const routes= route(queries);
 
 app.get("/",routes.home);
 app.all("/admin",routes.admin);
-app.all("waiters",routes.waiters);
+app.all("/waiters",routes.waiters);
+
+
 
 const PORT= process.env.PORT||8080;
 
