@@ -1,6 +1,7 @@
 <div class="container  admin">
 <h1>Staff Schedule</h1>
 <h3>This Week's Schedule</h3>
+<form action="/days" method="get">
 <table class="weekdays">
 <tr>
   <th>Mon</th>
@@ -21,5 +22,8 @@
 <td>0</td>
 </tr>
   </table>
+  </form>
+  <form action="/reset" method="post">
   <button type="submit">Clear Schedule</button>
+  </form>
 </div>
