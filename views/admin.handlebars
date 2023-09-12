@@ -1,29 +1,46 @@
 <div class="container  admin">
 <h1>Staff Schedule</h1>
-<h3>This Week's Schedule</h3>
-<form action="/days" method="get">
-<table class="weekdays">
-<tr>
-  <th>Mon</th>
-  <th>Tue</th>  
-  <th>Wed</th>  
-  <th>Thu</th>
-  <th>Fri</th>
-  <th>Sat</th>
-  <th>Sun</th>
-</tr>
-<tr>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-<td>0</td>
-</tr>
-  </table>
-  </form>
-  <form action="/reset" method="post">
+<h2>This Week's Schedule</h2>
+<div class="grid">
+<div id="mon">
+
+<h3>Mon</h3>
+{{#each monday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div id="tues">
+<h3>Tues</h3>
+{{#each tuesday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div><h3>Wed</h3>
+{{#each wednsday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div><h3>Thur</h3>
+{{#each thursday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div><h3>Fri</h3>
+{{#each friday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div><h3>Sat</h3>
+{{#each saturday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+<div><h3>Sun</h3>{{#each sunday}}
+<p>{{this}}</p>
+{{/each}}
+</div>
+</div>
+  <form action="/clear" method="post">
   <button type="submit">Clear Schedule</button>
-  </form>
+</form>
 </div>
