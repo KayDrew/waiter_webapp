@@ -1,24 +1,97 @@
 export default function queries(db){
 
-async function create(){
 
-  await  db.none(`CREATE TABLE IF NOT EXISTS days(monday VARCHAR(255),tuesday VARCHAR(255),wednsday VARCHAR(255),
-  thursday VARCHAR(255),friday VARCHAR(255),saturday VARCHAR(255),sunday VARCHAR(255));
- `)
+async function recordDays(id,day){
 
- await  db.none(`CREATE TABLE IF NOT EXISTS waiters(name VARCHAR(255);`);
+try{
+	
+	
+	
+	await db.none(`INSERT INTO days(dayID,day) VALUES ($1,$2)`,[id,day]);
+console.log("successfully inserted "+day);
 
+
+	
+}catch(err){
+	
+console.log(err);
+
+}
+
+}
+
+
+async function recordWaiters(waiter){
+
+try{
+	
+	if(waiter){
+	
+	await db.none(`INSERT INTO waiters(waiterID,name) VALUES (DEFAULT,$1)`,waiter);
+console.log("successfully inserted "+waiter);
+}
+
+else{
+console.log("user undefined");
+
+}
+	
+}catch(err){
+	
+console.log(err);
+
+}
+
+}
+
+
+async function getAdmin(){
+
+
+try{
+	
+	let result=await db.manyOrNone(`SELECT * FROM admin`);
+	console.log(result);
+	
+}catch(err){
+
+console.log(err);
+}
 }
 
 
 async function reset(){
 
+try{
+await db.none(`DELETE FROM waiters`);
+console.log("successfully  deleted!");
+}catch(err){
+
+console.log(err);
+}
 }
 
+async function getWaiters(){
 
-{
+try{
+	
+	let result=await db.manyOrNone(`SELECT * FROM waiters`);
+	console.log(result);
+	
+	return result;
+}catch(err){
 
-    create,
-    reset
+console.log(err);
+}
+
+}
+
+return{
+
+    reset,
+    recordDays,
+    recordWaiters,
+    getAdmin,
+    getWaiters
 }
 }
