@@ -39,11 +39,12 @@ const routes= route(queries);
 
 app.get("/",routes.home);
 app.all("/admin",routes.admin);
-app.all("/waiters",routes.waiters);
+app.all("/waiters/:username",routes.waiters);
+app.post("/clear", routes.clearSchedule);
 
 
 
-const PORT= process.env.PORT||8080;
+const PORT= process.env.PORT||5432;
 
 app.listen(PORT,function(){
     console.log("App starting on port "+PORT);
