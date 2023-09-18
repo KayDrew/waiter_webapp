@@ -1,6 +1,7 @@
 export default function routes(queries){
 
 let error="";
+let success="";
 let username="";
 
 
@@ -85,6 +86,8 @@ few=true;
 async function waiters(req,res,next){
 	
 	username=req.params.username;
+ req.flash("error",getError());
+ req.flash("success",getSuccess());
  
         res.render("waiters",{
         });
@@ -103,13 +106,15 @@ if(days){
 if(days.length<5){
 	
 error="Please  select at least 5 days";
+success="";
 }
 
 else{
 	
+	error="";
+	success="Your shift has been successfully updtaed!";
+	
 	await queries.update(username);
-	
-	
 	for(let i=0;i<days.length;++i){
 
 var day=Number(days[i]);
@@ -123,7 +128,7 @@ var day=Number(days[i]);
  
  }
 
-res.redirect("/waiters/:username");
+res.redirect("/waiters/"+username);
 }
 
 
@@ -140,9 +145,11 @@ console.log(err);
 }
 
 function getError(){
-
-console.log(error);
 return error;
+}
+
+function getSuccess(){
+return success;
 }
 
     return{
