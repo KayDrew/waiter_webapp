@@ -1,6 +1,6 @@
 <div class="container waiters">
 <h1>Select Shift Days</h1>
-<h4>The days on which you are available to work should be at least 5 and not more than 6</h4>
+<h4>The days on which you are available to work should be at least 5</h4>
 <p class="error">{{messages.error}}</p>
 <p class="success">{{messages.success}}</p>
 <form action="/waiters" method="post" id="waitersForm">
@@ -17,3 +17,14 @@
 <button type="submit"  id="update">Update</button>
 </form>
 </div>
+<script>
+setTimeout(function(){document.querySelector(".error").style.display="none";
+},3000);
+
+document.querySelector(".error").style.display="block";
+
+setTimeout(function(){document.querySelector(".success").style.display="none";
+},3000);
+
+document.querySelector(".success").style.display="block";
+</script>
