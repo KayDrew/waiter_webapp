@@ -12,5 +12,242 @@
     {{{body}}}
 
     </body>
+<script>
 
+setTimeout(function(){document.querySelector(".error").style.display="none";
+},3000);
+
+document.querySelector(".error").style.display="block";
+
+setTimeout(function(){document.querySelector(".success").style.display="none";
+},3000);
+
+document.querySelector(".success").style.display="block";
+
+
+const update= document.querySelector("#update");
+const checked=document.getElementsByName("day");
+const  mon= document.querySelector("#Mon");
+const  tue= document.querySelector("#Tues");
+const  wed= document.querySelector("#Wed");
+const  thur= document.querySelector("#Thurs");
+const  fri= document.querySelector("#Fri");
+const  sat= document.querySelector("#Sat");
+const  sun= document.querySelector("#Sun");
+
+
+function check(){
+
+
+if(mon.checked){
+
+localStorage.setItem("mon","true");
+
+}
+
+
+
+if(tue.checked){
+
+localStorage.setItem("tue","true");
+
+}
+
+
+
+if(wed.checked){
+
+localStorage.setItem("wed","true");
+
+}
+
+
+
+if(thur.checked){
+
+localStorage.setItem("thur","true");
+
+}
+
+
+
+if(fri.checked){
+
+localStorage.setItem("fri","true");
+
+}
+
+else{
+localStorage.setItem("fri","false");
+}
+
+if(sat.checked){
+
+localStorage.setItem("sat","true");
+
+}
+
+
+
+if(sun.checked){
+
+localStorage.setItem("sun","true");
+
+}
+
+
+
+}
+
+
+let monCheck=localStorage.getItem("mon");
+mon.checked=JSON.parse(monCheck);
+
+let tueCheck=localStorage.getItem("tue");
+tue.checked=JSON.parse(tueCheck);
+
+let wedCheck=localStorage.getItem("wed");
+wed.checked=JSON.parse(wedCheck);
+
+let thurCheck=localStorage.getItem("thur");
+thur.checked=JSON.parse(thurCheck);
+
+let friCheck=localStorage.getItem("fri");
+fri.checked=JSON.parse(friCheck);
+
+let satCheck=localStorage.getItem("sat");
+sat.checked=JSON.parse(satCheck);
+
+let sunCheck=localStorage.getItem("sun");
+sun.checked=JSON.parse(sunCheck);
+
+localStorage.clear();
+update.addEventListener("click",check);
+
+const monP= document.querySelectorAll(".monP");
+const monS= document.querySelector("#mon");
+const tueP= document.querySelectorAll(".tueP");
+const tueS= document.querySelector("#tues");
+const wedP= document.querySelectorAll(".wedP");
+const wedS= document.querySelector("#wed");
+const thurP= document.querySelectorAll(".thurP");
+const thurS= document.querySelector("#thur");
+const friP= document.querySelectorAll(".friP");
+const friS= document.querySelector("#fri");
+const satP= document.querySelectorAll(".satP");
+const satS= document.querySelector("#sat");
+const sunP= document.querySelectorAll(".sunP");
+const sunS= document.querySelector("#sun");
+
+
+if(monP.length>=3){
+monS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(monP.length==2 ){
+monS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+monS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+
+if(tueP.length>=3){
+tueS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(tueP.length==2 ){
+tueS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+tueS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+
+if(wedP.length>=3){
+wedS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(wedP.length==2 ){
+wedS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+wedS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+if(thurP.length>=3){
+thurS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(thurP.length==2 ){
+thurS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+thurS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+if(friP.length>=3){
+friS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(friP.length==2 ){
+friS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+friS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+
+if(satP.length>=3){
+satS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(satP.length==2 ){
+satS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+satS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+if(sunP.length>=3){
+sunS.style.backgroundColor="rgba(0,195,70,0.2)";
+
+}
+
+else if(sunP.length==2 ){
+sunS.style.backgroundColor="rgba(225, 174, 83,0.2)";
+
+}
+
+else{
+sunS.style.backgroundColor="rgba(225,0,70,0.2)";
+
+}
+
+ 
+</script>
 </html>
