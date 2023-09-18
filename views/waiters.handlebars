@@ -1,18 +1,19 @@
 <div class="container waiters">
-<h1>Select Shift Days</h1>  
-<h5 class="error">{{messages.error}}</h5>
-<h5 class="success">{{messages.success}}</h5>
-<form action="/waiters" method="post">
+<h1>Select Shift Days</h1>
+<h4>The days on which you are available to work should be at least 5 and not more than 6</h4>
+<p class="error">{{messages.error}}</p>
+<p class="success">{{messages.success}}</p>
+<form action="/waiters" method="post" id="waitersForm">
 <div class="checkbox">
-<input type ="checkbox" value="1" id="Mon" name="day"/><label for="Mon">Monday</label><br>
-<input type ="checkbox" value="2" id="Tues"  name="day"/><label for="Tues">Tuesday</label><br>
-<input type ="checkbox" value="3" id="Wed" name="day" /><label for="Wed">Wednesday</label><br>
-<input type ="checkbox" value="4" id="Thurs" name="day"/><label for="Thurs">Thursday</label><br>
+<input type ="checkbox" value="1" id="Mon" name="day" /><label for="Mon" id="red">Monday</label><br>
+<input type ="checkbox" value="2" id="Tues"  name="day" /><label for="Tues">Tuesday</label><br>
+<input type ="checkbox" value="3" id="Wed" name="day"  /><label for="Wed">Wednesday</label><br>
+<input type ="checkbox" value="4" id="Thurs" name="day"  /><label for="Thurs">Thursday</label><br>
 <input type ="checkbox" value="5" id="Fri" name="day"/><label for="Fri">Friday</label><br>
 <input type ="checkbox" value="6" id="Sat" name="day"/><label for="Sat">Saturday</label><br>
-<input type ="checkbox" value="7" id="Sun" name="day"/><label for="Sun">Sunday</label><br>
+<input type ="checkbox" value="7" id="Sun" name="day" /><label for="Sun">Sunday</label><br>
 </div>
 
-<button type="submit">Update</button>
+<button type="submit"  id="update">Update</button>
 </form>
 </div>
