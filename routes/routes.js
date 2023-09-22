@@ -3,23 +3,21 @@ export default function routes(queries){
 let error="";
 let success="";
 let username="";
+let regex = /^([a-zA-Z]{3,})$/;
 
 
     async function home(req,res,next){
-    
-//  await queries.reset();
-//queries.getAdmin();
- //   await queries.create()
+   
        res.render("index",{
 
         });
 
     }
 
-    
     async function admin(req,res,next){
-    	let few=false;
-    	let monday=[];
+    	
+ let few=false;
+ let monday=[];
 let tuesday=[];
 let wednsday=[];
 let thursday=[];
@@ -99,9 +97,11 @@ async function postWaiters(req,res,next){
 
 let days= req.body.day;
 
-await queries.recordWaiters(username);
+
+if(regex.test(username)){
 
 if(days){
+	
 
 if(days.length<5){
 	
@@ -127,6 +127,13 @@ var day=Number(days[i]);
 }
  
  }
+ 
+ }
+ 
+ else{
+
+error="Not updated.Name should only contain  letters."
+}
 
 res.redirect("/waiters/"+username);
 }
@@ -160,4 +167,4 @@ return success;
         getError,
         postWaiters 
     }
-    }
+	}
