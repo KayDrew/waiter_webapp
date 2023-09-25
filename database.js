@@ -108,6 +108,22 @@ console.log(err);
 }
 
 
+async function updateSchedule(name,day1,day2){
+	
+try{
+
+await db.none("DELETE FROM admin WHERE name=$1 AND dayID=$2",[name,day1]);
+await db.none("INSERT INTO admin(dayID,name) VALUES ($1,$2)",[day2,name]);
+
+}catch(err){
+	
+console.log(err);
+
+}
+
+}
+
+
 return{
     reset,
     recordDays,
@@ -115,6 +131,7 @@ return{
     getAdmin,
     update,
     setAdmin,
-    getWaiter    
+    getWaiter,
+   updateSchedule  
     }
 }
