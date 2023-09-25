@@ -4,7 +4,9 @@ let error="";
 let success="";
 let username="";
 let regex = /^([a-zA-Z]{3,})$/;
-
+const days=[{"day":"Monday", id:1},{"day":"Tuesday","id":2},{"day":"Wednsday","id":3},
+{"day":"Thursday","id":4},{"day":"Friday","id":5},{"day":"Saturday","id":6},{"day":"Sunday","id":7}];
+    	
 
     async function home(req,res,next){
    
@@ -16,7 +18,7 @@ let regex = /^([a-zA-Z]{3,})$/;
 
     async function admin(req,res,next){
     	
- let few=false;
+ 
  let monday=[];
 let tuesday=[];
 let wednsday=[];
@@ -24,11 +26,20 @@ let thursday=[];
 let friday=[];
 let saturday=[];
 let sunday=[];
-    	
+
+let names=[];
+
+
 let schedule=  await queries.getAdmin();
   
   for(let i=0;i<schedule.length;++i){
 var entry=schedule[i];
+
+if(!names.includes(entry.name)){
+	
+names.push(entry.name);
+
+}
 
 switch(entry. day){
 	
@@ -61,10 +72,6 @@ sunday.push(entry.name);
 break;
 }
 
-if(monday.length<3){
-
-few=true;
-}
 
 }  
 
@@ -75,7 +82,9 @@ few=true;
         thursday,
        friday,
       saturday,
-       sunday 
+       sunday,
+       days,
+       names 
         });
 
     }
@@ -151,6 +160,42 @@ console.log(err);
 }
 }
 
+async  function updateSchedule(req,res,next){
+
+let name=req.body.waiterName;
+let dayName1=req.body.fromDay;
+let dayName2=req.body.toDay;
+let day1=0;
+let day2=0;
+
+for(let i=0;i<days.length;++i){
+
+var day=days[i];
+
+if(day.day==dayName1){
+
+day1=day.id;
+
+}
+
+else if(day.day==dayName2){
+
+day2=day.id;
+}
+
+}
+
+
+try{
+
+await queries.updateSchedule(name,day1,day2);
+res.redirect("/admin");
+}catch(err){
+
+console.log(err);
+}
+}
+
 function getError(){
 return error;
 }
@@ -165,6 +210,7 @@ return success;
         waiters,
         clearSchedule,
         getError,
-        postWaiters 
+        postWaiters,
+        updateSchedule  
+  }
     }
-	}
