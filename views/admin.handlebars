@@ -8,40 +8,71 @@
 <h3>Mon</h3>
 {{#each monday}}
 <p class="monP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="tues">
 <h3>Tues</h3>
 {{#each tuesday}}
 <p class="tueP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="wed"><h3>Wed</h3>
 {{#each wednsday}}
 <p class="wedP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="thur"><h3>Thur</h3>
 {{#each thursday}}
 <p class="thurP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="fri"><h3>Fri</h3>
 {{#each friday}}
 <p class="friP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="sat"><h3>Sat</h3>
 {{#each saturday}}
 <p class="satP">{{this}}</p>
+
 {{/each}}
 </div>
 <div id="sun"><h3>Sun</h3>
 {{#each sunday}}
 <p class="sunP">{{this}}</p>
+
 {{/each}}
 </div>
 </div>
+  <button type="submit">Edit Schedule</button>
+  <div id="update">
+  <form action="/update" method="post">
+  <span>Move:</span>
+  <select name="waiterName">
+{{#each names}}
+<option>{{this}}</option>
+{{/each}}
+</select>
+<span>From:</span>
+<select name="fromDay">
+{{#each days}}
+<option>{{this.day}}</option>
+{{/each}}
+</select>
+<span>To:</span>
+<select name="toDay">
+{{#each days}}
+<option> {{this.day}}</option>
+{{/each}}
+</select>
+  <button type="submit">Update Schedule</button>
+  </div>
+  </form>
   <form action="/clear" method="post">
   <button type="submit">Clear Schedule</button>
 </form>
@@ -174,4 +205,4 @@ sunS.style.backgroundColor="rgba(225,0,70,0.2)";
 
 
 
-                                      </script>
+</script>
