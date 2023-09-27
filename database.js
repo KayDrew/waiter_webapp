@@ -1,5 +1,7 @@
 export default function queries(db){
 
+
+
 async function recordDays(id,day){
 
 try{
@@ -17,16 +19,16 @@ console.log(err);
 
 async function recordWaiters(waiter){
 	
-  if(waiter){
 	
    try{
 	
 	  await db.none(`INSERT INTO waiters(waiterID,name) VALUES (DEFAULT,$1)`,waiter);
-     }catch(err){
+	
+   }catch(err){
 	
      console.log(err);
       }
-  }
+  
 }
 
 
@@ -35,8 +37,7 @@ async function getAdmin(){
 
   try{
 	
-	  let result=await db.manyOrNone(`SELECT admin.name, days.day FROM admin JOIN days ON admin.dayID=days.dayID`);
-
+	  let result=await db.manyOrNone(`SELECT waiters.name, days.day FROM admin JOIN days ON admin.dayID=days.dayID JOIN  waiters on admin.waiterID =waiters.waiterID `);
 	  return result;
   }catch(err){
 
@@ -49,7 +50,7 @@ async function getAdmin(){
 async function reset(){
 
 try{
-await db.none(`DELETE FROM waiters`);
+
 await db.none(`DELETE FROM admin`);
 
 }catch(err){
@@ -58,11 +59,12 @@ console.log(err);
 }
 }
 
-async function setAdmin(dayID,waiter){
+async function setAdmin(dayID,waiterID){
 
 try{
 
-db.none("INSERT INTO admin(dayID,name) VALUES ($1,$2)",[dayID,waiter]);
+await db.none("INSERT INTO admin(dayID,waiterID) VALUES ($1,$2)",[dayID,waiterID]);
+
 
 } catch(err){
 	
@@ -71,14 +73,12 @@ console.log(err);
 }
 }
 
-async function update(waiter){
+async function update(waiterID){
 
-if(waiter){
 	
 try{
 	
-	await db.none("DELETE  FROM waiters WHERE name=$1",waiter);
-	await db.none("DELETE FROM admin WHERE name=$1",waiter);
+	await db.none("DELETE FROM admin WHERE waiterID=$1",waiterID);
 	
 	
 }catch(err){
@@ -86,17 +86,17 @@ try{
 console.log(err);
 }
 
+
+
 }
 
-}
 
 
-async  function  getWaiter(){
-
-		
+async function getWaiter(waiter){
 try{
 
-let result=db.manyOrNone("SELECT name FROM waiters");
+let result=await db.oneOrNone("SELECT name FROM waiters WHERE name=$1",waiter);
+
 return result;
 
 }catch(err){
@@ -108,12 +108,13 @@ console.log(err);
 }
 
 
-async function updateSchedule(name,day1,day2){
+async function updateSchedule(waiterID,day1,day2){
 	
 try{
 
-await db.none("DELETE FROM admin WHERE name=$1 AND dayID=$2",[name,day1]);
-await db.none("INSERT INTO admin(dayID,name) VALUES ($1,$2)",[day2,name]);
+await db.none("DELETE FROM admin WHERE waiterID=$1 AND dayID=$2",[waiterID,day1]);
+console.log("successfully  deleted ");
+await db.none("INSERT INTO admin(dayID,waiterID) VALUES ($1,$2)",[day2,waiterID]);
 
 }catch(err){
 	
@@ -123,6 +124,19 @@ console.log(err);
 
 }
 
+async function getWaiterID(name){
+
+try{
+
+let result=await db.oneOrNone("SELECT waiterID FROM waiters WHERE name=$1",name);
+let waiterID=result.waiterid;
+
+return  waiterID;
+}catch(err){
+console.log(err);
+}
+
+}
 
 return{
     reset,
@@ -132,6 +146,7 @@ return{
     update,
     setAdmin,
     getWaiter,
-   updateSchedule  
+   updateSchedule ,
+   getWaiterID
     }
 }
