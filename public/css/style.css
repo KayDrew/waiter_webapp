@@ -1,14 +1,14 @@
 body{
     text-align: center;
     background-color: rgba(0, 0, 0,0.9);
-    color: rgba(168, 116, 3,0.7); 
+    color: rgba(168, 116, 3,0.85); 
 }
 
 
 
 h1{
       
-    background-color: rgba(168, 116, 3,0.7); 
+    background-color: rgba(168, 116, 3,1); 
    margin-bottom:60px;
     font-family: monospace;
     border-radius: 6px;
@@ -41,6 +41,37 @@ font-family: monospace;
 margin-top:80px;
 }
 
+
+.grey{
+color: rgba(255,255,255,0.5);
+font-size: 1.2em;
+font-family: monospace;
+margin-top:10px;
+margin-bottom:20px;
+
+}
+
+#deleteWaiter select{
+margin-bottom:10px;
+background-color:  rgba(225,255,255,0.5);
+padding: 1px;
+}
+
+#deleteWaiter{
+margin-bottom:12px;
+border-bottom: 1px solid  rgba(225,255,255,0.5);
+}
+#remove{
+color:rgba(0,0,0,0.7);
+box-shadow: 0.5px 0.5px 1px 1px  rgba(0,0,0,0.5);
+width: 70px;
+padding: 3px;
+border-radius: 3px;
+background-color:rgb(168, 116, 3);
+}
+
+}
+
 td{
 background: grey;
 color: black;
@@ -58,6 +89,7 @@ text-align:left;
 margin-left: 30%;
 margin-bottom: 30px;
 
+
 }
 
 .grid{
@@ -71,7 +103,7 @@ color:rgb(168, 116, 3);
 
 }
 
-.waiters button,.admin button {
+.waiters button{
 background-color: transparent;
 color:rgb(168, 116, 3);  
 box-shadow: 0.5px 0.5px 1px 1px rgb(168, 116, 3);
@@ -79,9 +111,18 @@ margin-left:5px;
 margin-top: 80px;
 }
 
+.admin button {
+background-color: transparent;
+color:rgb(168, 116, 3);  
+box-shadow: 0.5px 0.5px 1px 1px rgb(168, 116, 3);
+margin-left:5px;
+margin-top: 10px;
+}
+
 #clear{
-color:rgba(225,0,70,0.6);
-box-shadow: 0.5px 0.5px 1px 1px  rgba(225,0,70,0.6);
+color:black;
+box-shadow: 0.5px 0.5px 1px 1px  rgb(168, 116, 3);
+background-color:rgba(168, 116, 3,0.9);
 }
 
 
@@ -132,13 +173,15 @@ font-size: 0.7em;
 }
 
 select{
- background-color: rgba(168, 116, 3,0.7); 
+ background-color:  rgba(225,255,255,0.5);
 border:none;
+border-radius: 3px;
 }
+
 p{
 
 font-weight:bolder;
-    color: rgb(168, 116, 3); 
+    color: rgba(255,255,255,0.5); 
 }
 
 h2{
@@ -181,8 +224,11 @@ h1{
     font-size: 2.1em; 
     margin-bottom: 100px;
 }
-span{
 
+#remove{
+font-size: 1.1em;
+}
+span{
 font-size: 1.1em;
 
 }
@@ -229,7 +275,7 @@ background-color: transparent;
 color:rgb(168, 116, 3);  
 box-shadow: 0.5px 0.5px 1px 1px rgb(168, 116, 3);
 margin-left:20px;
-margin-top: 60px;
+
 }
 
   }
