@@ -52,6 +52,23 @@
 
   <div id="update">
   <h2> Update Schedule</h2>
+  <div id="deleteWaiter">
+  <h3 class="grey"> Remove Waiter From A Specific Day</h3>
+  <form action="/removeWaiter" method="post">
+    <select name="waiterDelete">
+{{#each names}}
+<option>{{this}}</option>
+{{/each}}
+</select>
+<select name="deleteDay">
+{{#each days}}
+<option> {{this.day}}</option>
+{{/each}}
+</select>
+  <button type="submit" id="remove">Remove</button>
+</form>
+</div>
+<h3 class="grey">Move Waiter From One Day To Another</h3>
   <form action="/update" method="post">
   <span>Move:</span>
   <select name="waiterName">
@@ -97,7 +114,7 @@ const sunS= document.querySelector("#sun");
 
 
 if(monP.length>=3){
-monS.style.backgroundColor="rgba(0,195,70,0.2)";
+monS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -107,13 +124,13 @@ monS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-monS.style.backgroundColor="rgba(225,0,70,0.2)";
+monS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 
 if(tueP.length>=3){
-tueS.style.backgroundColor="rgba(0,195,70,0.2)";
+tueS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -123,13 +140,13 @@ tueS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-tueS.style.backgroundColor="rgba(225,0,70,0.2)";
+tueS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 
 if(wedP.length>=3){
-wedS.style.backgroundColor="rgba(0,195,70,0.2)";
+wedS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -139,12 +156,12 @@ wedS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-wedS.style.backgroundColor="rgba(225,0,70,0.2)";
+wedS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 if(thurP.length>=3){
-thurS.style.backgroundColor="rgba(0,195,70,0.2)";
+thurS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -154,12 +171,12 @@ thurS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-thurS.style.backgroundColor="rgba(225,0,70,0.2)";
+thurS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 if(friP.length>=3){
-friS.style.backgroundColor="rgba(0,195,70,0.2)";
+friS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -169,13 +186,13 @@ friS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-friS.style.backgroundColor="rgba(225,0,70,0.2)";
+friS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 
 if(satP.length>=3){
-satS.style.backgroundColor="rgba(0,195,70,0.2)";
+satS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -185,12 +202,12 @@ satS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-satS.style.backgroundColor="rgba(225,0,70,0.2)";
+satS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 if(sunP.length>=3){
-sunS.style.backgroundColor="rgba(0,195,70,0.2)";
+sunS.style.backgroundColor="rgba(0,155,30,0.1)";
 
 }
 
@@ -200,10 +217,12 @@ sunS.style.backgroundColor="rgba(225, 174, 83,0.2)";
 }
 
 else{
-sunS.style.backgroundColor="rgba(225,0,70,0.2)";
+sunS.style.backgroundColor="rgba(185,0,30,0.1)";
 
 }
 
 
 
-  </script>
+</script>
+
+
