@@ -19,13 +19,11 @@ app.use(express.static('images'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-
 app.use(session({
   secret: "no secret",
   resave: false,
   saveInitialized: false
 }));
-
 app.use(flash());
 
 const connectionString=process.env.URL;
@@ -33,9 +31,9 @@ const Pool= pkg();
 const db=Pool ({connectionString ,
 ssl: true 
 });
+
 const queries = dbQueries(db);
 const routes= route(queries);
-
 
 app.get("/",routes.home);
 app.all("/admin",routes.admin);
@@ -43,8 +41,7 @@ app.get("/waiters/:username",routes.waiters);
 app.post("/waiters",routes.postWaiters);
 app.post("/clear", routes.clearSchedule);
 app.post("/update",routes.updateSchedule);
-
-
+app.post("/removeWaiter",routes.removeWaiter);
 
 const PORT= process.env.PORT||5432;
 
