@@ -116,9 +116,9 @@ async function admin(req,res,next){
 
     if(days){
 	
-         if(days.length<5){
+         if(days.length<3 || days.length>5){
 	
-             error="Please  select at least 5 days";
+             error="Days should be between 3-5";
              success="";
       }
 
@@ -174,9 +174,8 @@ let dayName2=req.body.toDay;
 let day1=0;
 let day2=0;
 
-var waiterID= await queries.getWaiterID(name);
+let waiterID= await queries.getWaiterID(name);
 	
-
  for(let i=0;i<days.length;++i){
 
 var day=days[i];
@@ -207,6 +206,35 @@ var day=days[i];
 }
 
 
+async function removeWaiter(req,res,next){
+
+let name= req.body.waiterDelete;
+let waiterID= await queries.getWaiterID(name);
+let dayName=req.body.deleteDay;
+let dayID=0;
+
+for(let i=0;i<days.length;++i){
+
+var day=days[i];
+
+    if(day.day==dayName){
+
+           dayID=day.id;
+
+       }
+  }     
+try{
+await queries.deleteWaiter(waiterID,dayID);
+
+}catch(err){
+
+console.log(err);
+}
+
+res.redirect("/admin");
+
+}
+
 function getError(){
 	
      return error;
@@ -226,7 +254,9 @@ function getSuccess(){
         clearSchedule,
         getError,
         postWaiters,
-        updateSchedule  
+        updateSchedule,
+        removeWaiter
+  
       }
       
-}
+ }
