@@ -124,6 +124,21 @@ console.log(err);
 
 }
 
+
+async function deleteWaiter(waiterID,dayID){
+
+try{
+
+await db.none("DELETE FROM admin WHERE waiterID=$1 AND dayID=$2",[waiterID,dayID]);
+
+
+}catch(err){
+
+console.log(err);
+}
+
+}
+
 async function getWaiterID(name){
 
 try{
@@ -147,6 +162,7 @@ return{
     setAdmin,
     getWaiter,
    updateSchedule ,
-   getWaiterID
+   getWaiterID,
+   deleteWaiter
     }
 }
