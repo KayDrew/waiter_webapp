@@ -13,7 +13,6 @@
 
     </body>
 <script>
-const update= document.querySelector("#update");
 const checked=document.getElementsByName("day");
 const  mon= document.querySelector("#Mon");
 const  tue= document.querySelector("#Tues");
@@ -23,96 +22,13 @@ const  fri= document.querySelector("#Fri");
 const  sat= document.querySelector("#Sat");
 const  sun= document.querySelector("#Sun");
 
+mon.checked={{monChecked}};
+tue.checked={{tuesChecked}};
+wed.checked={{wedChecked}};
+thur.checked={{thurChecked}};
+fri.checked={{friChecked}};
+sat.checked={{satChecked}};
+sun.checked={{sunChecked}};
 
-function check(){
-
-
-if(mon.checked){
-
-localStorage.setItem("mon","true");
-
-}
-
-
-
-if(tue.checked){
-
-localStorage.setItem("tue","true");
-
-}
-
-
-
-if(wed.checked){
-
-localStorage.setItem("wed","true");
-
-}
-
-
-
-if(thur.checked){
-
-localStorage.setItem("thur","true");
-
-}
-
-
-
-if(fri.checked){
-
-localStorage.setItem("fri","true");
-
-}
-
-else{
-localStorage.setItem("fri","false");
-}
-
-if(sat.checked){
-
-localStorage.setItem("sat","true");
-
-}
-
-
-
-if(sun.checked){
-
-localStorage.setItem("sun","true");
-
-}
-
-
-
-}
-
-
-let monCheck=localStorage.getItem("mon");
-mon.checked=JSON.parse(monCheck);
-
-let tueCheck=localStorage.getItem("tue");
-tue.checked=JSON.parse(tueCheck);
-
-let wedCheck=localStorage.getItem("wed");
-wed.checked=JSON.parse(wedCheck);
-
-let thurCheck=localStorage.getItem("thur");
-thur.checked=JSON.parse(thurCheck);
-
-let friCheck=localStorage.getItem("fri");
-fri.checked=JSON.parse(friCheck);
-
-let satCheck=localStorage.getItem("sat");
-sat.checked=JSON.parse(satCheck);
-
-let sunCheck=localStorage.getItem("sun");
-sun.checked=JSON.parse(sunCheck);
-
-localStorage.clear();
-update.addEventListener("click",check);
-
-
- 
 </script>
 </html>
