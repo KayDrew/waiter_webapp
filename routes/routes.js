@@ -92,10 +92,71 @@ async function admin(req,res,next){
   async function waiters(req,res,next){
 	
 	username=req.params.username;
+	let waiterDays=[];
+	
+	let monChecked=false;
+	let tuesChecked=false;
+	let wedChecked=false;
+	let thurChecked=false;
+	let friChecked=false;
+	let satChecked=false;
+	let sunChecked=false;
+	
+	if(regex.test(username)){
+
+waiterDays=await queries.getWaiterDays(username);
+
+for(let i=0;i<waiterDays. length;++i){
+
+let day=waiterDays[i].dayid;
+
+switch(day){
+case 1 : 
+monChecked=true;
+break;
+
+case 2 : 
+tuesChecked=true;
+break;
+
+case  3: 
+wedChecked=true;
+break;
+
+case 4 : 
+thurChecked=true;
+break;
+
+case  5: 
+friChecked=true;
+break;
+
+case  6: 
+satChecked=true;
+break;
+
+case  7: 
+sunChecked=true;
+break;
+
+        }
+
+    }
+}
+	
     req.flash("error",getError());
     req.flash("success",getSuccess());
  
-        res.render("waiters");
+
+ 
+res.render("waiters",{
+monChecked,
+tuesChecked,
+wedChecked,
+thurChecked,
+friChecked,
+satChecked,
+sunChecked});
 
     }
     
@@ -103,17 +164,23 @@ async function admin(req,res,next){
   async function postWaiters(req,res,next){
 
     let days= req.body.day;
-
+    let waiterID=0;
+    
     if(regex.test(username)){
 	
-          var waiterName= await queries.getWaiter(username);
-
-           if(waiterName==null || waiterName==undefined){
+          //var waiterName= await queries.getWaiter(username);
+      waiterID= await queries.getWaiterID(username);
+      
+           if(waiterID==null || waiterID==undefined){
 
                  await queries.recordWaiters(username);
              }
 
+else{
 
+let recordedDays= await queries.getDays(waiterID);
+
+}
     if(days){
 	
          if(days.length<3 || days.length>5){
@@ -124,7 +191,7 @@ async function admin(req,res,next){
 
    else{
 	
-	      var waiterID= await queries.getWaiterID(username);
+	
 	      error="";
 	      success="Your shift has been successfully updtaed!";
 	
