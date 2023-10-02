@@ -107,6 +107,24 @@ console.log(err);
 
 }
 
+async function getWaiterDays(name){
+
+if(name){
+
+try{
+
+let result= await  db.manyOrNone("SELECT dayID FROM admin JOIN waiters ON admin.waiterID = waiters.waiterID WHERE name =$1",name);
+
+return result;
+
+}catch(err){
+
+console.log(err);
+}
+
+}
+}
+
 
 async function updateSchedule(waiterID,day1,day2){
 	
@@ -153,6 +171,18 @@ console.log(err);
 
 }
 
+async function getDays(waiterID){
+
+try{
+let result=await db.manyOrNone("SELECT dayID FROM admin WHERE waiterID=$1",waiterID);
+
+return result;
+}catch(err){
+
+console.log(err);
+}
+}
+
 return{
     reset,
     recordDays,
@@ -163,6 +193,7 @@ return{
     getWaiter,
    updateSchedule ,
    getWaiterID,
-   deleteWaiter
-    }
+   deleteWaiter,
+   getDays,
+   getWaiterDays     }
 }
