@@ -92,7 +92,7 @@ async function admin(req,res,next){
   async function waiters(req,res,next){
 	
 	
-	username=req.params.username;
+	let input=req.params.username;
 	let waiterDays=[];
 	
 	let monChecked=false;
@@ -102,6 +102,23 @@ async function admin(req,res,next){
 	let friChecked=false;
 	let satChecked=false;
 	let sunChecked=false;
+	
+	if(input){
+	var trimmed=input.trim();
+
+var cap = "";
+var low = "";
+
+for (let i = 0; i < trimmed.length - 1; ++i) {
+
+	cap = trimmed.charAt(0).toUpperCase();
+   low += trimmed.charAt(i + 1).toLowerCase();
+}
+	
+
+	username = cap+low;
+	
+	}
 	
 	if(regex.test(username)){
 
@@ -171,6 +188,7 @@ success="";
     let days= req.body.day;
     let waiterID=0;
     
+    
     if(regex.test(username)){
 	
           //var waiterName= await queries.getWaiter(username);
@@ -179,13 +197,10 @@ success="";
            if(waiterID==null || waiterID==undefined){
 
                  await queries.recordWaiters(username);
+                 waiterID=await queries.getWaiterID(username);
              }
 
-else{
 
-let recordedDays= await queries.getDays(waiterID);
-
-}
     if(days){
 	
          if(days.length<3 || days.length>5){
@@ -356,4 +371,4 @@ res.redirect("/login");
   
       }
       
- }
+}
