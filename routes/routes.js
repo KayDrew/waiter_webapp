@@ -91,6 +91,7 @@ async function admin(req,res,next){
     
   async function waiters(req,res,next){
 	
+	
 	username=req.params.username;
 	let waiterDays=[];
 	
@@ -156,8 +157,12 @@ wedChecked,
 thurChecked,
 friChecked,
 satChecked,
-sunChecked});
+sunChecked,
+username 
 
+});
+
+success="";
     }
     
 
@@ -313,6 +318,29 @@ function getSuccess(){
       return success;
 }
 
+function  login(req,res,next){
+
+res.render("login");
+}
+
+async function  postLogin(req,res,next){
+
+let username=req.body.logName;
+let password=req.body.password;
+
+if(password=="test"){
+console.log("password matches");
+
+}
+
+else{
+
+console.log("login failed");
+
+}
+
+res.redirect("/login");
+}
 
     return{	
         home,
@@ -322,7 +350,9 @@ function getSuccess(){
         getError,
         postWaiters,
         updateSchedule,
-        removeWaiter
+        removeWaiter,
+        login,
+        postLogin
   
       }
       
