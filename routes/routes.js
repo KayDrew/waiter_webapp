@@ -1,8 +1,12 @@
 export default function routes(queries){
 
 let error="";
+let loginError="";
+let adminError="";
 let success="";
 let username="";
+let password="";
+let passRegex= /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 let regex = /^([a-zA-Z]{3,})$/;
 
 const days=[{"day":"Monday", id:1},{"day":"Tuesday","id":2},{"day":"Wednsday","id":3},
@@ -10,10 +14,8 @@ const days=[{"day":"Monday", id:1},{"day":"Tuesday","id":2},{"day":"Wednsday","i
     	
 
     async function home(req,res,next){
-    	
-       res.render("index",{
-
-        });
+    
+       res.render("index");
 
     }
 
@@ -27,6 +29,18 @@ async function admin(req,res,next){
    let saturday=[];
    let sunday=[];
    let names=[];
+   
+   let adminPass= req.body.password;
+   
+   if(adminPass){
+
+try{
+
+let pass=await queries.getAdminPassword();
+
+if(adminPass===pass){
+
+adminError="";
 
    let schedule=  await queries.getAdmin();
 
@@ -85,14 +99,31 @@ async function admin(req,res,next){
        days,
        names 
         });
+        
+         }
+        
+    else{
 
-    }
+             adminError="Your password is incorrect.";
+      }  
+
+   }catch(err){
+
+console.log(err);
+   }
+   
+ }
+ else{
+adminError="Please enter a password";
+
+}
+  
+
+ }
 
     
   async function waiters(req,res,next){
 	
-	
-	let input=req.params.username;
 	let waiterDays=[];
 	
 	let monChecked=false;
@@ -103,26 +134,7 @@ async function admin(req,res,next){
 	let satChecked=false;
 	let sunChecked=false;
 	
-	if(input){
-	var trimmed=input.trim();
-
-var cap = "";
-var low = "";
-
-for (let i = 0; i < trimmed.length - 1; ++i) {
-
-	cap = trimmed.charAt(0).toUpperCase();
-   low += trimmed.charAt(i + 1).toLowerCase();
-}
-	
-
-	username = cap+low;
-	
-	}
-	
-	if(regex.test(username)){
-
-waiterDays=await queries.getWaiterDays(username);
+ waiterDays=await queries.getWaiterDays(username);
 
 for(let i=0;i<waiterDays. length;++i){
 
@@ -159,13 +171,11 @@ break;
 
         }
 
-    }
+    
 }
 	
-    req.flash("error",getError());
-    req.flash("success",getSuccess());
- 
-
+  req.flash("error",getError());
+  req.flash("success",getSuccess());
  
 res.render("waiters",{
 monChecked,
@@ -176,27 +186,27 @@ friChecked,
 satChecked,
 sunChecked,
 username 
-
 });
 
 success="";
     }
     
+    
+    function getUser(){
+
+        return username;
+   }
 
   async function postWaiters(req,res,next){
 
     let days= req.body.day;
     let waiterID=0;
     
-    
-    if(regex.test(username)){
-	
-          //var waiterName= await queries.getWaiter(username);
       waiterID= await queries.getWaiterID(username);
       
            if(waiterID==null || waiterID==undefined){
 
-                 await queries.recordWaiters(username);
+                 await queries.recordWaiters(username,password);
                  waiterID=await queries.getWaiterID(username);
              }
 
@@ -228,15 +238,8 @@ success="";
  
     }
  
- }
- 
- 
- else{
 
-      error="Not updated.Name should only contain  letters."
-   }
-
-    res.redirect("/waiters/"+username);
+    res.redirect("/waiters/"+username+"/"+password);
 }
 
 
@@ -338,26 +341,115 @@ function  login(req,res,next){
 res.render("login");
 }
 
+
 async function  postLogin(req,res,next){
 
-let username=req.body.logName;
-let password=req.body.password;
+let input=req.body.username;
+let dataPass="";
+password=req.body.password;
 
-if(password=="test"){
-console.log("password matches");
+if(input){
+	var trimmed=input.trim();
+
+    var cap = "";
+    var low = "";
+
+   for (let i = 0; i < trimmed.length - 1; ++i) {
+
+	cap = trimmed.charAt(0).toUpperCase();
+     low += trimmed.charAt(i + 1).toLowerCase();
+   }
+	
+	  username = cap+low;
+	
+
+   if(regex.test(username)){
+
+       let waiter= await queries.getWaiter(username);
+
+       if(waiter){
+	
+	          if(password){
+		
+	                   dataPass= await queries.getPassword(username);
+	
+	                    if(dataPass===password){
+		                     loginError="";
+                              res.redirect("/waiters/"+username+"/"+password);
+                       }
+
+                       else{
+
+                           loginError="Your password  is incorrect.";
+
+                        }
+               }
+
+             else{
+                loginError="Please enter  a password";
+
+             }         
+              
+      }
+	
+   else{
+  	
+        if(password){
+  
+                if(passRegex.test(password)){
+                loginError="";
+                 res.redirect("/waiters/"+username+"/"+password);
+
+                 }
+
+               else{
+                 loginError="Password  should be at least 6 chars long, include both lower and upper case chars, include  1 number and 1 special char";
+                }
+       }  
+     
+     else{
+
+               loginError="Please enter  a password";
+        }
+
+   }
+ 
+ }
+ 
+  else{
+ 
+      loginError="Name should only contain  letters."
+     }
 
 }
 
 else{
 
-console.log("login failed");
+           loginError="Please enter your name";
+}
+
 
 }
 
-res.redirect("/login");
+function  waiterNavigate(req,res,next){
+
+req.flash("loginError", loginError);
+res.render("login");
+
 }
+
+function  adminNavigate(req,res,next){
+
+req.flash("adminError",adminError);
+
+res.render("admin-login");
+
+}
+
+
 
     return{	
+    
         home,
         admin,
         waiters,
@@ -367,8 +459,11 @@ res.redirect("/login");
         updateSchedule,
         removeWaiter,
         login,
-        postLogin
+        postLogin,
+        waiterNavigate,
+        adminNavigate,
+        
   
       }
       
-}
+ }
