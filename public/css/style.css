@@ -33,6 +33,7 @@ grid-template-columns: 1fr 1fr;
   margin-top:10px;
 }
 
+
 .login input{
 margin-bottom: 5px;
 background-color: transparent;
@@ -152,9 +153,9 @@ margin-top: 10px;
 }
 
 #clear{
-color:black;
-box-shadow: 0.5px 0.5px 1px 1px  rgb(168, 116, 3);
-background-color:rgba(168, 116, 3,0.9);
+color:grey;
+box-shadow: 0.5px 0.5px 1px 1px  grey;
+background-color:rgba(185,0,30,0.1);
 }
 
 
@@ -220,6 +221,15 @@ h2{
 margin-top:16px;
 font-family: monospace;
 }
+
+#logout{
+background-color: rgba(168, 116, 3,1); 
+color: black;
+margin-bottom: 15px;
+margin-top: 30px;
+}
+
+
   @media screen and (max-width:700px){
 
 p{
@@ -296,7 +306,11 @@ margin-left: 120px;
   font-size: 1.5em;
 }
 
+.logout{
 
+background-color:  ;
+color:  ;
+}
 
 .waiters button{
 margin-left:60px;
