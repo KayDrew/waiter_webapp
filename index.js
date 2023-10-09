@@ -42,10 +42,11 @@ app.post("/waiters",routes.postWaiters);
 app.post("/clear", routes.clearSchedule);
 app.post("/update",routes.updateSchedule);
 app.post("/removeWaiter",routes.removeWaiter);
-app.get("/login",routes.login);
-app.post("/login",routes.postLogin);
 app.get("/waiterNavigate",routes.waiterNavigate);
+app.post("/login",routes.postLogin);
 app.get("/adminNavigate", routes.adminNavigate);
+
+app.post("/adminLogin", routes.adminLogin);
 
 const PORT= process.env.PORT||5432;
 
