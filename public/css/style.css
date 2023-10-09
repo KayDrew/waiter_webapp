@@ -18,6 +18,29 @@ h1{
     box-shadow: 2px 2px 2px 2px black;
 }
 
+#buttons{
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
+
+#buttons button{
+  margin-left:10px;
+}
+
+.login button {
+
+  margin-left:10px;
+  margin-top:10px;
+}
+
+.login input{
+margin-bottom: 5px;
+background-color: transparent;
+border: none;
+border-bottom: 1px  solid grey;
+color: grey;
+}
+
 button{
     background-color: rgb(168, 116, 3);  
     width: 120px; 
@@ -32,7 +55,12 @@ button{
     
 }
 
-
+#logHead{
+border-bottom: 2px solid grey;
+font-size: 2.1em;
+font-family: calibri;
+font-weight: bolder;
+}
 
 h3{
 color:rgb(168, 116, 3);  
@@ -49,6 +77,10 @@ font-family: monospace;
 margin-top:10px;
 margin-bottom:20px;
 
+}
+
+.login label{
+color: grey;
 }
 
 #deleteWaiter select{
@@ -195,6 +227,17 @@ font-size: 10.5px;
 font-weight:bold;
 
 }
+
+
+.login {
+margin-top:120px;
+
+}
+
+.login input{
+
+margin-bottom: 30px;
+}
 }
   
   @media screen and (min-width:700px){
@@ -204,7 +247,7 @@ font-weight:bold;
     border-radius: 5px;
     border: 3px solid rgb(168, 116, 3);  
     margin:0 auto;
-    margin-top:5%;
+    margin-top:20%;
     padding-bottom: 30px;
     padding-left: 30px;
     padding-right: 30px;
