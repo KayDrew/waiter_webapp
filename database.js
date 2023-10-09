@@ -1,30 +1,27 @@
 export default function queries(db){
 
 
-
 async function recordDays(id,day){
 
-try{
+     try{
 	
-	await db.none(`INSERT INTO days(dayID,day) VALUES ($1,$2)`,[id,day]);
+	       await db.none(`INSERT INTO days(dayID,day) VALUES ($1,$2)`,[id,day]);
 
- }catch(err){
+     }catch(err){
 	
-console.log(err);
+          console.log(err);
 
 }
 
 }
 
 
-async function recordWaiters(waiter){
-	
+async function recordWaiters(waiter,password){
 	
    try{
 	
-	  await db.none(`INSERT INTO waiters(waiterID,name) VALUES (DEFAULT,$1)`,waiter);
-	
-   }catch(err){
+	  await db.none(`INSERT INTO waiters(waiterID,name,password) VALUES (DEFAULT,$1,$2)`,[waiter,password]);
+    }catch(err){
 	
      console.log(err);
       }
@@ -34,11 +31,11 @@ async function recordWaiters(waiter){
 
 async function getAdmin(){
 
-
   try{
 	
 	  let result=await db.manyOrNone(`SELECT waiters.name, days.day FROM admin JOIN days ON admin.dayID=days.dayID JOIN  waiters on admin.waiterID =waiters.waiterID `);
 	  return result;
+	
   }catch(err){
 
    console.log(err);
@@ -49,63 +46,58 @@ async function getAdmin(){
 
 async function reset(){
 
-try{
+  try{
 
-await db.none(`DELETE FROM admin`);
+      await db.none(`DELETE FROM admin`);
 
-}catch(err){
+   }catch(err){
 
-console.log(err);
+      console.log(err);
+   }
 }
-}
 
-async function setAdmin(dayID,waiterID){
+ async function setAdmin(dayID,waiterID){
 
-try{
+    try{
 
-await db.none("INSERT INTO admin(dayID,waiterID) VALUES ($1,$2)",[dayID,waiterID]);
+         await db.none("INSERT INTO admin(dayID,waiterID) VALUES ($1,$2)",[dayID,waiterID]);
 
-
-} catch(err){
+    } catch(err){
 	
-console.log(err);
+        console.log(err);
 
-}
+    }
 }
 
 async function update(waiterID){
 
 	
-try{
+   try{
 	
-	await db.none("DELETE FROM admin WHERE waiterID=$1",waiterID);
+	     await db.none("DELETE FROM admin WHERE waiterID=$1",waiterID);
 	
-	
-}catch(err){
+   }catch(err){
 
-console.log(err);
-}
-
-
+        console.log(err);
+ }
 
 }
-
 
 
 async function getWaiter(waiter){
-try{
-
-let result=await db.oneOrNone("SELECT name FROM waiters WHERE name=$1",waiter);
-
-return result;
-
-}catch(err){
 	
-console.log(err);
+  try{
 
-}
+         let result=await db.oneOrNone("SELECT name FROM waiters WHERE name=$1",waiter);
+          return result;
 
-}
+    }catch(err){
+	
+             console.log(err);
+
+     }
+
+ }
 
 async function getWaiterDays(name){
 
@@ -161,27 +153,64 @@ async function getWaiterID(name){
 
 try{
 
-let result=await db.oneOrNone("SELECT waiterID FROM waiters WHERE name=$1",name);
-let waiterID=result.waiterid;
-
-return  waiterID;
-}catch(err){
-console.log(err);
-}
+     let result=await db.oneOrNone("SELECT waiterID FROM waiters WHERE name=$1",name);
+     let waiterID=result.waiterid;
+      return  waiterID;
+      
+   }catch(err){
+       console.log(err);
+  }
 
 }
 
 async function getDays(waiterID){
 
-try{
-let result=await db.manyOrNone("SELECT dayID FROM admin WHERE waiterID=$1",waiterID);
+  try{
+  	
+   let result=await db.manyOrNone("SELECT dayID FROM admin WHERE waiterID=$1",waiterID);
+    return result;
+    
+  }catch(err){
 
+     console.log(err);
+  }
+}
+
+
+async  function getPassword(waiter){
+
+try{
+	
+  let pass=await  db.oneOrNone("SELECT password  FROM waiters WHERE name=$1",waiter);
+ let result= pass.password 
 return result;
-}catch(err){
+ 
+
+ }catch(err){
 
 console.log(err);
 }
+
 }
+
+async  function getAdminPassword(){
+
+try{
+	
+  let pass=await  db.oneOrNone("SELECT password  FROM waiters WHERE name=$1","Admin");
+ let result= pass.password ;
+ console.log(result);
+return result;
+ 
+
+ }catch(err){
+
+console.log(err);
+}
+
+}
+
+
 
 return{
     reset,
@@ -195,5 +224,8 @@ return{
    getWaiterID,
    deleteWaiter,
    getDays,
-   getWaiterDays     }
+   getWaiterDays,
+   getPassword,
+   getAdminPassword
+     }
 }
