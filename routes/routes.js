@@ -214,7 +214,7 @@ success="";
     }
  
 
-    res.redirect("/waiters/"+username+"/"+password);
+    res.redirect("/waiters/"+username);
 }
 
 
@@ -491,4 +491,4 @@ res.redirect("/");
   
       }
       
-	    }
+    }
