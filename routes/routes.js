@@ -351,7 +351,7 @@ if(input){
 	
 	                    if(dataPass===password){
 		                     loginError="";
-                              res.redirect("/waiters/"+username+"/"+password);
+                              res.redirect("/waiters/"+username);
                        }
 
                        else{
@@ -375,7 +375,7 @@ res.redirect("/waiterNavigate");
   
                 if(passRegex.test(password)){
                 loginError="";
-                 res.redirect("/waiters/"+username+"/"+password);
+                 res.redirect("/waiters/"+username);
 
                  }
 
@@ -465,6 +465,13 @@ res.redirect("/adminNavigate");
 
 }
 
+
+function logout(req,res,next){
+
+res.redirect("/");
+
+}
+
     return{	
     
         home,
@@ -478,9 +485,10 @@ res.redirect("/adminNavigate");
         postLogin,
         waiterNavigate,
         adminNavigate,
-        adminLogin
+        adminLogin,
+        logout
         
   
       }
       
- }
+	    }
