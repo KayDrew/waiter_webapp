@@ -30,23 +30,12 @@ async function admin(req,res,next){
    let sunday=[];
    let names=[];
    
-   let adminPass= req.body.password;
-   
-   if(adminPass){
-
-try{
-
-let pass=await queries.getAdminPassword();
-
-if(adminPass===pass){
-
-adminError="";
 
    let schedule=  await queries.getAdmin();
 
- if(schedule){
+  if(schedule){
   
-   for(let i=0;i<schedule.length;++i){
+    for(let i=0;i<schedule.length;++i){
   	
       var entry=schedule[i];
 
@@ -88,7 +77,7 @@ adminError="";
 
    }
 
-}  
+
        res.render("admin",{monday,
         tuesday,
        wednsday,
@@ -102,21 +91,7 @@ adminError="";
         
          }
         
-    else{
-
-             adminError="Your password is incorrect.";
-      }  
-
-   }catch(err){
-
-console.log(err);
-   }
-   
- }
- else{
-adminError="Please enter a password";
-
-}
+    
   
 
  }
@@ -336,11 +311,12 @@ function getSuccess(){
       return success;
 }
 
-function  login(req,res,next){
+function  waiterNavigate(req,res,next){
 
+req.flash("loginError", loginError);
 res.render("login");
-}
 
+}
 
 async function  postLogin(req,res,next){
 
@@ -379,15 +355,16 @@ if(input){
                        }
 
                        else{
-
+                         
                            loginError="Your password  is incorrect.";
-
+res.redirect("/waiterNavigate");
                         }
                }
 
              else{
+             
                 loginError="Please enter  a password";
-
+	     res.redirect("/waiterNavigate");
              }         
               
       }
@@ -404,12 +381,14 @@ if(input){
 
                else{
                  loginError="Password  should be at least 6 chars long, include both lower and upper case chars, include  1 number and 1 special char";
+                      res.redirect("/waiterNavigate");
                 }
        }  
      
      else{
 
                loginError="Please enter  a password";
+                    res.redirect("/waiterNavigate");
         }
 
    }
@@ -419,6 +398,7 @@ if(input){
   else{
  
       loginError="Name should only contain  letters."
+           res.redirect("/waiterNavigate");
      }
 
 }
@@ -426,17 +406,13 @@ if(input){
 else{
 
            loginError="Please enter your name";
+                res.redirect("/waiterNavigate");
 }
 
 
 }
 
-function  waiterNavigate(req,res,next){
 
-req.flash("loginError", loginError);
-res.render("login");
-
-}
 
 function  adminNavigate(req,res,next){
 
@@ -448,6 +424,47 @@ res.render("admin-login");
 
 
 
+
+
+async function adminLogin(req,res,next){
+
+let adminPass= req.body.adminPass;
+
+if(adminPass){
+	
+	try{
+
+let pass= await  queries.getAdminPassword();
+
+if(pass===adminPass){
+	adminError="";
+	
+ res.redirect("/admin");
+}
+
+
+else{
+adminError="You have entered an incorrect password";
+res.redirect("/adminNavigate");
+}
+
+}catch(err){
+
+console.log(err)
+}
+	
+	
+
+}
+
+else{
+
+adminError="Please enter a password";
+res.redirect("/adminNavigate");
+}
+
+}
+
     return{	
     
         home,
@@ -458,10 +475,10 @@ res.render("admin-login");
         postWaiters,
         updateSchedule,
         removeWaiter,
-        login,
         postLogin,
         waiterNavigate,
         adminNavigate,
+        adminLogin
         
   
       }
