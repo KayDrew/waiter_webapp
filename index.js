@@ -37,11 +37,15 @@ const routes= route(queries);
 
 app.get("/",routes.home);
 app.all("/admin",routes.admin);
-app.get("/waiters/:username",routes.waiters);
+app.get("/waiters/:username/:password",routes.waiters);
 app.post("/waiters",routes.postWaiters);
 app.post("/clear", routes.clearSchedule);
 app.post("/update",routes.updateSchedule);
 app.post("/removeWaiter",routes.removeWaiter);
+app.get("/login",routes.login);
+app.post("/login",routes.postLogin);
+app.get("/waiterNavigate",routes.waiterNavigate);
+app.get("/adminNavigate", routes.adminNavigate);
 
 const PORT= process.env.PORT||5432;
 
