@@ -37,7 +37,7 @@ const routes= route(queries);
 
 app.get("/",routes.home);
 app.all("/admin",routes.admin);
-app.get("/waiters/:username/:password",routes.waiters);
+app.get("/waiters/:username",routes.waiters);
 app.post("/waiters",routes.postWaiters);
 app.post("/clear", routes.clearSchedule);
 app.post("/update",routes.updateSchedule);
@@ -45,8 +45,8 @@ app.post("/removeWaiter",routes.removeWaiter);
 app.get("/waiterNavigate",routes.waiterNavigate);
 app.post("/login",routes.postLogin);
 app.get("/adminNavigate", routes.adminNavigate);
-
 app.post("/adminLogin", routes.adminLogin);
+app.post("/logout",routes.logout);
 
 const PORT= process.env.PORT||5432;
 
