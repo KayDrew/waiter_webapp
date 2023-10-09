@@ -1,6 +1,6 @@
 <div class="container login">
 <h2 id="logHead">Login</h2>
-<form action="/login" method="post">
+<form action="/login" method="post" >
 <label for="name">username: </label><input type="text"   name="username"/><br/>
 <label for="password">password: </label><input type="password"  id="password" name="password"/>
 <p class="error">{{messages.loginError}}</p>
@@ -8,6 +8,7 @@
 </form>
 </div>
 <script>
+
 setTimeout(function(){document.querySelector(".error").style.display="none";
 },5000);
 
